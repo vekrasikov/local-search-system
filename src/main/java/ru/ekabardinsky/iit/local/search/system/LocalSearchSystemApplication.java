@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-package ru.ekabardinsky.iit.jsp;
+package ru.ekabardinsky.iit.local.search.system;
 
+import com.mongodb.MongoClient;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -25,8 +28,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.tartarus.snowball.SnowballStemmer;
 import org.tartarus.snowball.ext.englishStemmer;
-import ru.ekabardinsky.iit.jsp.indexer.Indexer;
-import ru.ekabardinsky.iit.jsp.parser.Parser;
+import ru.ekabardinsky.iit.local.search.system.indexer.Indexer;
+import ru.ekabardinsky.iit.local.search.system.parser.Parser;
 
 import java.util.ArrayList;
 
@@ -48,6 +51,16 @@ public class LocalSearchSystemApplication extends SpringBootServletInitializer {
     @Bean
     public Indexer indexer() {
         return new Indexer();
+    }
+
+    @Bean
+    public MongoClient client() {
+        return new MongoClient();
+    }
+
+    @Bean
+    public Datastore datastore(MongoClient client) {
+        return new Morphia().createDatastore(client, "local");
     }
 
     @Override

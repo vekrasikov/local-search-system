@@ -1,15 +1,11 @@
-package ru.ekabardinsky.iit.jsp.controller;
+package ru.ekabardinsky.iit.local.search.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.tartarus.snowball.ext.englishStemmer;
-import ru.ekabardinsky.iit.jsp.indexer.Indexer;
-import ru.ekabardinsky.iit.jsp.parser.Parser;
-import ru.ekabardinsky.iit.jsp.template.IndexerTemplate;
-
-import java.util.List;
+import ru.ekabardinsky.iit.local.search.system.indexer.Indexer;
+import ru.ekabardinsky.iit.local.search.system.template.IndexerTemplate;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
