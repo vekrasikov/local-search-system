@@ -20,21 +20,43 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.tartarus.snowball.SnowballStemmer;
+import org.tartarus.snowball.ext.englishStemmer;
+import ru.ekabardinsky.iit.jsp.indexer.Indexer;
+import ru.ekabardinsky.iit.jsp.parser.Parser;
+
+import java.util.ArrayList;
 
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
 public class LocalSearchSystemApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(LocalSearchSystemApplication.class);
-	}
+    @Bean
+    public Parser parser() {
+        return new Parser(new ArrayList<>());//TODO add bad words
+    }
 
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(LocalSearchSystemApplication.class, args);
-	}
+    @Bean
+    public SnowballStemmer stemmer() {
+        return new englishStemmer();
+    }
+
+    @Bean
+    public Indexer indexer() {
+        return new Indexer();
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(LocalSearchSystemApplication.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(LocalSearchSystemApplication.class, args);
+    }
 
 }
