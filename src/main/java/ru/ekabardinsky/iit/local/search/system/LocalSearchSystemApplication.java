@@ -28,8 +28,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.tartarus.snowball.SnowballStemmer;
 import org.tartarus.snowball.ext.englishStemmer;
-import ru.ekabardinsky.iit.local.search.system.indexer.Indexer;
-import ru.ekabardinsky.iit.local.search.system.parser.Parser;
+import ru.ekabardinsky.iit.local.search.system.searchEngine.Indexer;
+import ru.ekabardinsky.iit.local.search.system.searchEngine.Parser;
+import ru.ekabardinsky.iit.local.search.system.persist.MongoPersistManager;
 
 import java.util.ArrayList;
 
@@ -61,6 +62,11 @@ public class LocalSearchSystemApplication extends SpringBootServletInitializer {
     @Bean
     public Datastore datastore(MongoClient client) {
         return new Morphia().createDatastore(client, "local");
+    }
+
+    @Bean
+    public MongoPersistManager mongoPersistManager() {
+        return new MongoPersistManager();
     }
 
     @Override

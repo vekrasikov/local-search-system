@@ -1,28 +1,21 @@
-package ru.ekabardinsky.iit.local.search.system.indexer;
+package ru.ekabardinsky.iit.local.search.system.persist;
 
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.ekabardinsky.iit.local.search.system.parser.Parser;
 import ru.ekabardinsky.iit.local.search.system.template.IndexerTemplate;
 
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by ekabardinsky on 2/21/17.
  */
-public class Indexer {
-    @Autowired
-    private Parser parser;
-
+public class MongoPersistManager {
     @Autowired
     private Datastore datastore;
 
-    public IndexerTemplate index(IndexerTemplate body) {
-        body.setTokenizedText(parser.parse(body.getText()));
-        HashSet<String> tokenSet = new HashSet<>(body.getTokenizedText());
-        body.setTokens(tokenSet);
-
+    public void saveIfNotExists(IndexerTemplate body) {
         //persist template to mongo
         Query<IndexerTemplate> existsDuplicate = datastore
                 .createQuery(IndexerTemplate.class)
@@ -32,6 +25,14 @@ public class Indexer {
         if (countExistsDuplicate == 0) {
             datastore.save(body);
         }
-        return body;
+    }
+    public List<IndexerTemplate> searchByTokens(HashSet<String> tokens) {
+        Query<IndexerTemplate> searchByTokensQuery = datastore
+                .createQuery(IndexerTemplate.class)
+                .field("tokens")
+                .hasAnyOf(tokens);
+
+        List<IndexerTemplate> indexerTemplates = searchByTokensQuery.asList();
+        return indexerTemplates;
     }
 }

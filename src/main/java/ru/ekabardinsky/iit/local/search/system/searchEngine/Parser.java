@@ -1,4 +1,4 @@
-package ru.ekabardinsky.iit.local.search.system.parser;
+package ru.ekabardinsky.iit.local.search.system.searchEngine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tartarus.snowball.SnowballStemmer;

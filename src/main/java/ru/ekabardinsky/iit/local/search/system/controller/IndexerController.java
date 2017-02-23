@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.ekabardinsky.iit.local.search.system.indexer.Indexer;
+import ru.ekabardinsky.iit.local.search.system.searchEngine.Indexer;
 import ru.ekabardinsky.iit.local.search.system.template.IndexerTemplate;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
