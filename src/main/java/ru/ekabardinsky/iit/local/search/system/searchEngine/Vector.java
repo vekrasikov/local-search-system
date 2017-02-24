@@ -3,7 +3,6 @@ package ru.ekabardinsky.iit.local.search.system.searchEngine;
 import ru.ekabardinsky.iit.local.search.system.template.IndexerTemplate;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * Created by ekabardinsky on 2/23/17.
@@ -15,5 +14,13 @@ public class Vector {
     public Vector(IndexerTemplate template, HashMap<String, Double> vector) {
         this.template = template;
         this.vector = vector;
+    }
+
+    public HashMap<String, Double> getVector() {
+        return vector;
+    }
+
+    public IndexerTemplate getTemplate() {
+        return template;
     }
 }

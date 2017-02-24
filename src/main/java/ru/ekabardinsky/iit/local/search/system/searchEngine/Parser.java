@@ -2,10 +2,11 @@ package ru.ekabardinsky.iit.local.search.system.searchEngine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tartarus.snowball.SnowballStemmer;
-import org.tartarus.snowball.ext.englishStemmer;
+import ru.ekabardinsky.iit.local.search.system.template.IndexerTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -47,5 +48,14 @@ public class Parser {
                 });
 
         return resultSet;
+    }
+
+    public IndexerTemplate getIndexerTemplate(String body) {
+        IndexerTemplate template = new IndexerTemplate();
+        template.setText(body);
+        template.setTokenizedText(parse(body));
+        template.setTokens(new HashSet<>(template.getTokenizedText()));
+
+        return template;
     }
 }

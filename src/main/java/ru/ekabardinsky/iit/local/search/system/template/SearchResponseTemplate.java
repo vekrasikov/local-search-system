@@ -9,10 +9,13 @@ import java.util.List;
  * Created by ekabardinsky on 2/23/17.
  */
 public class SearchResponseTemplate {
+    private Vector query;
+    private String status;
     private List<SearchResponseEntryTemplate> templates;
 
-    public SearchResponseTemplate() {
-        templates = new ArrayList<>();
+    public SearchResponseTemplate(Vector query, String status) {
+        this.query = query;
+        this.status = status;
     }
 
     public List<SearchResponseEntryTemplate> getTemplates() {
@@ -23,4 +26,11 @@ public class SearchResponseTemplate {
         this.templates = templates;
     }
 
+    public Vector getQuery() {
+        return query;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

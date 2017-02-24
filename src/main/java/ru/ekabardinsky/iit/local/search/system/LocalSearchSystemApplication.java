@@ -31,6 +31,9 @@ import org.tartarus.snowball.ext.englishStemmer;
 import ru.ekabardinsky.iit.local.search.system.searchEngine.Indexer;
 import ru.ekabardinsky.iit.local.search.system.searchEngine.Parser;
 import ru.ekabardinsky.iit.local.search.system.persist.MongoPersistManager;
+import ru.ekabardinsky.iit.local.search.system.searchEngine.SearchEngine;
+import ru.ekabardinsky.iit.local.search.system.searchEngine.calculator.SearchResponseFactory;
+import ru.ekabardinsky.iit.local.search.system.searchEngine.calculator.VectorFactory;
 
 import java.util.ArrayList;
 
@@ -55,18 +58,28 @@ public class LocalSearchSystemApplication extends SpringBootServletInitializer {
     }
 
     @Bean
-    public MongoClient client() {
-        return new MongoClient();
-    }
-
-    @Bean
-    public Datastore datastore(MongoClient client) {
-        return new Morphia().createDatastore(client, "local");
+    public Datastore datastore() {
+        return new Morphia().createDatastore(new MongoClient(), "local");
     }
 
     @Bean
     public MongoPersistManager mongoPersistManager() {
         return new MongoPersistManager();
+    }
+
+    @Bean
+    public SearchEngine searchEngine() {
+        return new SearchEngine();
+    }
+
+    @Bean
+    public VectorFactory vectorFactory() {
+        return new VectorFactory();
+    }
+
+    @Bean
+    public SearchResponseFactory searchResponseFactory() {
+        return new SearchResponseFactory();
     }
 
     @Override

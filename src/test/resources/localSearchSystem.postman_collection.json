@@ -3,13 +3,35 @@
 	"name": "localSearchSystem",
 	"description": "",
 	"order": [
-		"c6fc4f46-703c-0f67-6cf6-f53763b2c4df"
+		"c6fc4f46-703c-0f67-6cf6-f53763b2c4df",
+		"3f2487e1-9721-b7e1-e95e-ad3a421f2846"
 	],
 	"folders": [],
 	"timestamp": 1487658578814,
 	"owner": "824333",
 	"public": false,
 	"requests": [
+		{
+			"id": "3f2487e1-9721-b7e1-e95e-ad3a421f2846",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8080/api/search",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "ba00d0fc-c018-6d4f-8055-7ed1516ae55f",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/api/search",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487913202001,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"searchText\": \"the\",\n\t\"metricType\": \"Cosin\",\n\t\"vectorType\": \"TF\"\n}"
+		},
 		{
 			"id": "c6fc4f46-703c-0f67-6cf6-f53763b2c4df",
 			"headers": "Accept-Encoding: utf-8\nContent-Type: application/json\n",

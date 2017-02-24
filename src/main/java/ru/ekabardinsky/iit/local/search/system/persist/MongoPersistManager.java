@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by ekabardinsky on 2/21/17.
  */
-public class MongoPersistManager {
+public class MongoPersistManager implements PersistManager {
     @Autowired
     private Datastore datastore;
 
@@ -26,6 +26,7 @@ public class MongoPersistManager {
             datastore.save(body);
         }
     }
+
     public List<IndexerTemplate> searchByTokens(HashSet<String> tokens) {
         Query<IndexerTemplate> searchByTokensQuery = datastore
                 .createQuery(IndexerTemplate.class)
@@ -34,5 +35,19 @@ public class MongoPersistManager {
 
         List<IndexerTemplate> indexerTemplates = searchByTokensQuery.asList();
         return indexerTemplates;
+    }
+
+    @Override
+    public Long countDocumentWithToken(String token) {
+        Query<IndexerTemplate> countDocumentQuery = datastore
+                .createQuery(IndexerTemplate.class)
+                .field("tokens")
+                .contains(token);
+        return datastore.getCount(countDocumentQuery);
+    }
+
+    @Override
+    public Long countAllDocument() {
+        return datastore.getCollection(IndexerTemplate.class).count();
     }
 }

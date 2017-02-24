@@ -2,17 +2,18 @@ package ru.ekabardinsky.iit.local.search.system.searchEngine.calculator;
 
 import ru.ekabardinsky.iit.local.search.system.searchEngine.MetricType;
 import ru.ekabardinsky.iit.local.search.system.searchEngine.Vector;
-import ru.ekabardinsky.iit.local.search.system.template.IndexerTemplate;
 import ru.ekabardinsky.iit.local.search.system.template.SearchResponseEntryTemplate;
 import ru.ekabardinsky.iit.local.search.system.template.SearchResponseTemplate;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by ekabardinsky on 2/23/17.
  */
-public class SearchResponseFabric {
-    private static MetricCalculator getCalculator(MetricType type) {
+public class SearchResponseFactory {
+    private MetricCalculator getCalculator(MetricType type) {
         MetricCalculator calculator;
 
         if (MetricType.Cosin.equals(type)) {
@@ -27,27 +28,29 @@ public class SearchResponseFabric {
         return calculator;
     }
 
-    public static SearchResponseEntryTemplate getEntryInstance(Vector query, Vector searchEntry, MetricType type) {
+    public SearchResponseEntryTemplate getEntryInstance(Vector query, Vector searchEntry, MetricType type) {
         return getEntryInstance(query, searchEntry, getCalculator(type));
     }
 
-    public static SearchResponseEntryTemplate getEntryInstance(Vector query, Vector searchEntry, MetricCalculator calculator) {
+    public SearchResponseEntryTemplate getEntryInstance(Vector query, Vector searchEntry, MetricCalculator calculator) {
         SearchResponseEntryTemplate template = new SearchResponseEntryTemplate();
         template.setSearchEntry(searchEntry);
         template.setRate(calculator.calculcate(query, searchEntry));
         return template;
     }
 
-    public static SearchResponseTemplate getResponseInstance(Vector query, List<Vector> searchEntries, MetricType type) {
+    public SearchResponseTemplate getResponseInstance(Vector query, List<Vector> searchEntries, MetricType type) {
         return getResponseInstance(query, searchEntries, getCalculator(type));
     }
 
-    public static SearchResponseTemplate getResponseInstance(Vector query, List<Vector> searchEntries, MetricCalculator calculator) {
-        SearchResponseTemplate responseTemplate = new SearchResponseTemplate();
-        searchEntries.forEach(x -> {
-            responseTemplate.getTemplates().add(getEntryInstance(query, x, calculator));
-        });
-
+    public SearchResponseTemplate getResponseInstance(Vector query, List<Vector> searchEntries, MetricCalculator calculator) {
+        SearchResponseTemplate responseTemplate = new SearchResponseTemplate(query, "Found " + searchEntries.size() + " entries");
+        List<SearchResponseEntryTemplate> searchResponseEntryTemplates = searchEntries
+                .stream()
+                .map(x -> getEntryInstance(query, x, calculator))
+                .sorted((x, y) -> -Double.compare(x.getRate(), y.getRate()))
+                .collect(Collectors.toList());
+        responseTemplate.setTemplates(searchResponseEntryTemplates);
         return responseTemplate;
     }
 
