@@ -3,8 +3,7 @@ app.controller('searchController', function ($scope, $http, $mdToast) {
     $scope.query = "";
     $scope.metricType = "Jaccard";
     $scope.vectorType = "TFIDF";
-    $scope.queryObject = {};
-    $scope.searchResponse = { some: "sd "};
+    $scope.searchResponse = {};
 
     $scope.showToastFail = function () {
         $mdToast.show({
@@ -15,15 +14,14 @@ app.controller('searchController', function ($scope, $http, $mdToast) {
         });
     };
     $scope.search = function () {
-        $scope.queryObject = {
+        var queryObject = {
             searchText: $scope.query,
             metricType: $scope.metricType,
-            vectorType: "TFIDF"
+            vectorType: $scope.vectorType
         };
-        $http.post('/api/search', $scope.queryObject)
+        $http.post('/api/search', queryObject)
             .then(function (response) {
                     $scope.searchResponse = response.data;
-                    $scope.showToastSuccess();
                 },
                 function (response) {
                     $scope.showToastFail();

@@ -1,7 +1,11 @@
-<div ng-controller="indexationController">
-    <md-input-container class="md-block">
-        <span>Text</span>
-        <textarea ng-model="text" rows="10"/>
-    </md-input-container>
-    <md-button class="md-raised md-primary" ng-click="indexing()">Index</md-button>
+<div ng-controller="indexationController" layout="column">
+    <md-button class="md-primary" ng-click="indexing()">Index</md-button>
+    <hr/>
+    <div md-whiteframe="5">
+        <md-input-container class="md-block">
+            <p>Text</p>
+            <textarea ng-model="text" rows="10"/>
+        </md-input-container>
+    </div>
+
 </div>
