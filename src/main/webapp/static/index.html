@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet"
+          href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+    <script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc2/angular-material.js"></script>
+    <script src="/js/route/mainRoute.js"></script>
+    <script src="/js/controller/index.js"></script>
+    <script src="/js/controller/indexationController.js"></script>
+    <script src="/js/controller/successToast.js"></script>
+    <script src="/js/controller/failToast.js"></script>
+    <script src="/js/controller/searchController.js"></script>
 </head>
-<body>
-Something
+<body ng-app="SearchSystem">
+<div layout="column" layout-fill ng-controller="indexController">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button href="/#/search" layout="row"><p>Search</p></md-button>
+            <md-button href="/#/indexation" layout="row"><p>Index</p></md-button>
+        </div>
+    </md-toolbar>
+    <md-content style="height: inherit">
+        <div class="content" ng-view/>
+    </md-content>
+</div>
 </body>
 </html>

@@ -1,0 +1,39 @@
+<div ng-controller="searchController">
+    <div style="padding-top: 2pc" md-whiteframe="10" layout="row" layout-align="center center">
+        <md-input-container class="md-block" style="width: 50pc">
+            <span>Query</span>
+            <input ng-model="query"/>
+        </md-input-container>
+
+        <md-radio-group style="padding-left: 2pc" ng-model="metricType">
+            <md-radio-button value="Jaccard" class="md-primary">Jaccard</md-radio-button>
+            <md-radio-button value="Dice" class="md-primary">Dice</md-radio-button>
+            <md-radio-button value="Cosin" class="md-primary">Cosin</md-radio-button>
+        </md-radio-group>
+        <md-radio-group style="padding-left: 2pc" ng-model="vectorType">
+            <md-radio-button value="Boolean" class="md-primary">Boolean</md-radio-button>
+            <md-radio-button value="TF" class="md-primary">TF</md-radio-button>
+            <md-radio-button value="TFIDF" class="md-primary">TFIDF</md-radio-button>
+        </md-radio-group>
+        <md-button class="md-raised md-primary" ng-click="search()">Search</md-button>
+    </div>
+    <hr />
+
+    <md-content class="md-padding" >
+        <span>{{searchResponse.status}}</span>
+        <hr/>
+        <div  flex-xs layout="column" ng-repeat="item in searchResponse.templates">
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Rate: {{item.rate | number}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-content>
+                    <p>{{item.searchEntry.template.text}}</p>
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
+</div>
