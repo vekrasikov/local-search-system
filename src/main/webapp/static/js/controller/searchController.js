@@ -19,7 +19,7 @@ app.controller('searchController', function ($scope, $http, $mdToast) {
             metricType: $scope.metricType,
             vectorType: $scope.vectorType
         };
-        $http.post('/api/search', queryObject)
+        $http.get('/api/search', queryObject)
             .then(function (response) {
                     $scope.searchResponse = response.data;
                 },

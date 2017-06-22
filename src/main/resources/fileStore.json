@@ -1,0 +1,57 @@
+[
+  {
+    "id": {
+      "_time": 1498094615,
+      "_machine": 979132041,
+      "_inc": 1459602270,
+      "_new": true
+    },
+    "text": "test",
+    "tokenizedText": [],
+    "tokens": []
+  },
+  {
+    "id": {
+      "_time": 1498094718,
+      "_machine": 979168103,
+      "_inc": -173358593,
+      "_new": true
+    },
+    "text": "test",
+    "tokenizedText": [],
+    "tokens": []
+  },
+  {
+    "id": {
+      "_time": 1498094746,
+      "_machine": 979115523,
+      "_inc": -1569484834,
+      "_new": true
+    },
+    "text": "test",
+    "tokenizedText": [],
+    "tokens": []
+  },
+  {
+    "id": {
+      "_time": 1498095604,
+      "_machine": 979117190,
+      "_inc": 2026849125,
+      "_new": true
+    },
+    "text": "test",
+    "tokenizedText": [],
+    "tokens": []
+  },
+  {
+    "id": {
+      "_time": 1498095823,
+      "_machine": 979145510,
+      "_inc": 198602029,
+      "_new": true
+    },
+    "text": "test",
+    "tokenizedText": [],
+    "tokens": []
+  }
+]
